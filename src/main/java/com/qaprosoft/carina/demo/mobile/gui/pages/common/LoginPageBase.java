@@ -6,46 +6,44 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 
 public abstract class LoginPageBase extends AbstractPage {
 
-	public LoginPageBase(WebDriver driver) {
-		super(driver);
-	}
+    public LoginPageBase(WebDriver driver) {
+        super(driver);
+    }
 
-	public abstract void typeName(String name);
+    public abstract void typeName(String name);
 
-	public abstract void typePassword(String password);
+    public abstract void typePassword(String password);
 
-	public abstract void selectMaleSex();
+    public abstract void selectMaleSex();
 
-	public abstract void checkPrivacyPolicyCheckbox();
+    public abstract void checkPrivacyPolicyCheckbox();
 
-	public abstract CarinaDescriptionPageBase clickLoginBtn();
+    public abstract CarinaDescriptionPageBase clickLoginBtn();
 
-	public abstract boolean isLoginBtnActive();
+    public abstract boolean isLoginBtnActive();
 
-	public abstract CarinaDescriptionPageBase login();
+    public abstract CarinaDescriptionPageBase login();
 
-	public abstract boolean isOpened();
+    public abstract boolean isOpened();
 
-	public abstract boolean isPrivacyPolicyCheckboxPresent();
+    public abstract boolean isPrivacyPolicyCheckboxPresent();
 
-	public abstract boolean isFemaleRadioBtnPresent();
+    public abstract void selectSexRadioBtn(String MALE_SEX);
 
-	public abstract boolean isMaleRadioBtnPresent();
+    public abstract boolean isMaleRadioBtnPresent();
 
-	public abstract boolean isPasswordInputFieldPresent();
+    public abstract boolean isFemaleRadioBtnPresent();
 
-	public abstract boolean isNameInputFieldPresent();
+    public abstract boolean isPasswordInputFieldPresent();
 
-	public abstract String getUsername();
+    public abstract boolean isNameInputFieldPresent();
 
-	public abstract String getPassword();
+    public abstract String getUsername();
 
-	public abstract void selectFemaleSex();
+    public abstract String getPassword();
 
-	public abstract boolean isFemaleRadioButtonChecked();
+    public abstract boolean isSexRadioBtnChecked(String MALE_SEX);
 
-	public abstract boolean isMaleRadioButtonChecked();
-
-	public abstract boolean isPrivacyPolicyCheckboxChecked();
+    public abstract boolean isPrivacyPolicyCheckboxChecked();
 
 }

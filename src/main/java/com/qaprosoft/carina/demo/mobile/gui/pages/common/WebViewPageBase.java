@@ -13,6 +13,5 @@ public abstract class WebViewPageBase extends AbstractPage {
 
     public abstract boolean isOpened();
 
-    public abstract boolean isContactUsLinkPresent();
-
+    public abstract boolean isWebViewElementPresent();
 }

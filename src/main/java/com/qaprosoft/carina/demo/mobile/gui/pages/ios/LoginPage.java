@@ -98,6 +98,11 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
+    public void selectSexRadioBtn(String MALE_SEX) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public boolean isFemaleRadioBtnPresent() {
         throw new NotImplementedException();
     }
@@ -128,17 +133,7 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
-    public void selectFemaleSex() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isFemaleRadioButtonChecked() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isMaleRadioButtonChecked() {
+    public boolean isSexRadioBtnChecked(String MALE_SEX) {
         throw new NotImplementedException();
     }
 

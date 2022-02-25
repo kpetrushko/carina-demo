@@ -37,6 +37,8 @@ import org.testng.asserts.SoftAssert;
 
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
+    private static final String MALE_SEX = "male";
+
     @Test()
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
@@ -55,7 +57,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         Assert.assertTrue(carinaDescriptionPage.isPageOpened(), "Carina description page isn't opened");
     }
 
-	@Test()
+    @Test()
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testWebView() {
@@ -113,26 +115,28 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         Assert.assertTrue(welcomePage.isPageOpened(), "Welcome page isn't opened");
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertTrue(loginPage.isOpened(), "Login page isn`t opened");
-        softAssert.assertTrue(loginPage.isNameInputFieldPresent(), "Name input field is null");
+        softAssert.assertTrue(loginPage.isNameInputFieldPresent(), "Name input field isn't present");
         softAssert.assertTrue(loginPage.isPasswordInputFieldPresent(), "Password input field is null");
         softAssert.assertTrue(loginPage.isMaleRadioBtnPresent(), "Male radio button is null");
         softAssert.assertTrue(loginPage.isFemaleRadioBtnPresent(), "Female radio button is null");
         softAssert.assertTrue(loginPage.isPrivacyPolicyCheckboxPresent(), "Privacy Policy Checkbox is null");
-        softAssert.assertAll();
         loginPage.typeName(username);
+        Assert.assertEquals(loginPage.getUsername(), username, String.format("Username [%s] was not typed, [%s] was typed instead",
+                username, loginPage.getUsername()));
         Assert.assertEquals(loginPage.getUsername(), username, "Name was not typed");
         loginPage.typePassword(password);
         Assert.assertEquals(loginPage.getPassword(), password, "Password was not typed");
-        loginPage.selectFemaleSex();
-        Assert.assertTrue(loginPage.isFemaleRadioButtonChecked(), "Female radio button was not checked");
-        loginPage.selectMaleSex();
-        Assert.assertTrue(loginPage.isMaleRadioButtonChecked(), "Male radio button was not checked");
+        Assert.assertEquals(loginPage.getPassword(), password, String.format("Password [%s] was not typed, [%s] was typed instead",
+                password, loginPage.getPassword()));
+        loginPage.selectSexRadioBtn(MALE_SEX);
+        Assert.assertTrue(loginPage.isSexRadioBtnChecked(MALE_SEX), "Sex Radio Button was not checked");
         loginPage.checkPrivacyPolicyCheckbox();
         Assert.assertTrue(loginPage.isPrivacyPolicyCheckboxChecked(), "Privacy Policy Checkbox was not checked");
         CarinaDescriptionPageBase carinaDescription = loginPage.clickLoginBtn();
         Assert.assertTrue(carinaDescription.isPageOpened(), "Carina description page isn't opened");
         WebViewPageBase webViewPage = carinaDescription.navigateToWebViewPage();
         Assert.assertTrue(webViewPage.isOpened(), "Web View Page isn`t opened");
-        Assert.assertTrue(webViewPage.isContactUsLinkPresent(), "Contact us link is null");
+        Assert.assertTrue(webViewPage.isWebViewElementPresent(), "There is no web view element");
+        softAssert.assertAll();
     }
 }

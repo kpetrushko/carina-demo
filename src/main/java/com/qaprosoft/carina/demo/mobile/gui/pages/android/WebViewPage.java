@@ -13,6 +13,9 @@ public class WebViewPage extends WebViewPageBase {
     @FindBy(xpath = "//*[@class='t708__icon']")
     private ExtendedWebElement contactUsLink;
 
+    @FindBy(className = "android.widget.TextView")
+    private ExtendedWebElement webViewElement;
+
     public WebViewPage(WebDriver driver) {
         super(driver);
     }
@@ -25,12 +28,12 @@ public class WebViewPage extends WebViewPageBase {
 
     @Override
     public boolean isOpened() {
-        return contactUsLink.isElementPresent();
+        return webViewElement.isElementPresent();
     }
 
     @Override
-    public boolean isContactUsLinkPresent() {
-        return contactUsLink.isPresent();
+    public boolean isWebViewElementPresent() {
+        return webViewElement.isPresent();
     }
 
 }

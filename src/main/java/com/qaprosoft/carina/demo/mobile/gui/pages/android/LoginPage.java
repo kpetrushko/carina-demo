@@ -1,6 +1,5 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.android;
 
-import com.qaprosoft.carina.demo.mobile.gui.pages.common.WebViewPageBase;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -15,11 +14,16 @@ import com.qaprosoft.carina.demo.mobile.gui.pages.common.LoginPageBase;
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils {
 
+    private static final String MALE_SEX = "male";
+
     @FindBy(id = "name")
     private ExtendedWebElement nameInputField;
 
     @FindBy(id = "password")
     private ExtendedWebElement passwordInputField;
+
+    @FindBy(className = "android.widget.RadioButton")
+    private ExtendedWebElement sexRadioBTn;
 
     @FindBy(id = "radio_male")
     private ExtendedWebElement maleRadioBtn;
@@ -48,6 +52,11 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
+    public void selectSexRadioBtn(String MALE_SEX) {
+        sexRadioBTn.click();
+    }
+
+    @Override
     public boolean isMaleRadioBtnPresent() {
         return maleRadioBtn.isPresent();
     }
@@ -56,6 +65,7 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     public boolean isFemaleRadioBtnPresent() {
         return femaleRadioBtn.isPresent();
     }
+
 
     @Override
     public boolean isPrivacyPolicyCheckboxPresent() {
@@ -89,18 +99,8 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public void selectFemaleSex() {
-        femaleRadioBtn.click();
-    }
-
-    @Override
-    public boolean isFemaleRadioButtonChecked() {
-        return femaleRadioBtn.isChecked();
-    }
-
-    @Override
-    public boolean isMaleRadioButtonChecked() {
-        return maleRadioBtn.isChecked();
+    public boolean isSexRadioBtnChecked(String MALE_SEX) {
+        return sexRadioBTn.isChecked();
     }
 
     @Override
