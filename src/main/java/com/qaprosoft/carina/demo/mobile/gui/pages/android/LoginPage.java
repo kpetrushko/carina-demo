@@ -10,11 +10,18 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.CarinaDescriptionPageBase;
 import com.qaprosoft.carina.demo.mobile.gui.pages.common.LoginPageBase;
+import org.testng.Assert;
+import org.testng.log4testng.Logger;
+
+import java.util.List;
+
+import static com.qaprosoft.carina.demo.constans.IConstans.*;
+
 
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils {
 
-    private static final String MALE_SEX = "male";
+    public static final Logger LOGGER = Logger.getLogger(LoginPage.class);
 
     @FindBy(id = "name")
     private ExtendedWebElement nameInputField;
@@ -23,7 +30,7 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     private ExtendedWebElement passwordInputField;
 
     @FindBy(className = "android.widget.RadioButton")
-    private ExtendedWebElement sexRadioBTn;
+    private List<ExtendedWebElement> sexRadioBtns;
 
     @FindBy(id = "radio_male")
     private ExtendedWebElement maleRadioBtn;
@@ -42,30 +49,40 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isNameInputFieldPresent() {
-        return nameInputField.isPresent();
+    public boolean isInputFieldPresent(String fieldName) {
+        if (fieldName.equals(NAME_INPUT_FIELD))
+            return nameInputField.isPresent();
+        if (fieldName.equals(PASSWORD_INPUT_FIELD))
+            return passwordInputField.isPresent();
+        else
+            LOGGER.info("There is no input field that you choose on the page.");
+        return false;
     }
 
     @Override
-    public boolean isPasswordInputFieldPresent() {
-        return passwordInputField.isPresent();
+    public void selectSexRadioBtn(String sex) {
+        if (sexRadioBtns.isEmpty())
+            Assert.fail("There are no sex buttons on the page.");
+        if (sex.equals(MALE_SEX))
+            sexRadioBtns.get(0).click();
+        else {
+            if (sex.equals(FEMALE_SEX))
+                sexRadioBtns.get(1).click();
+            else
+                Assert.fail("There is no sex that you choose.");
+        }
     }
 
     @Override
-    public void selectSexRadioBtn(String MALE_SEX) {
-        sexRadioBTn.click();
+    public boolean isSexRadioBtnPresent(String fieldSex) {
+        if (fieldSex.equals(MALE_RADIO_BUTTON_FIELD))
+            return maleRadioBtn.isPresent();
+        if (fieldSex.equals(FEMALE_RADIO_BUTTON_FIELD))
+            return femaleRadioBtn.isPresent();
+        else
+            LOGGER.info("There is no input field that you choose on the page.");
+        return false;
     }
-
-    @Override
-    public boolean isMaleRadioBtnPresent() {
-        return maleRadioBtn.isPresent();
-    }
-
-    @Override
-    public boolean isFemaleRadioBtnPresent() {
-        return femaleRadioBtn.isPresent();
-    }
-
 
     @Override
     public boolean isPrivacyPolicyCheckboxPresent() {
@@ -99,8 +116,16 @@ public class LoginPage extends LoginPageBase implements IMobileUtils {
     }
 
     @Override
-    public boolean isSexRadioBtnChecked(String MALE_SEX) {
-        return sexRadioBTn.isChecked();
+    public boolean isSexRadioBtnChecked(String sex) {
+       if (sexRadioBtns.isEmpty())
+           Assert.fail("There are no sex buttons on the page.");
+       if (sex.equals(MALE_SEX))
+          return sexRadioBtns.get(0).isChecked();
+        if (sex.equals(FEMALE_SEX))
+            return sexRadioBtns.get(1).isChecked();
+        else
+            LOGGER.info("There is no sex that you choose.");
+        return false;
     }
 
     @Override

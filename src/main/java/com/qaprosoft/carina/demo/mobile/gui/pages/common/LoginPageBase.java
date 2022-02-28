@@ -28,21 +28,17 @@ public abstract class LoginPageBase extends AbstractPage {
 
     public abstract boolean isPrivacyPolicyCheckboxPresent();
 
-    public abstract void selectSexRadioBtn(String MALE_SEX);
+    public abstract void selectSexRadioBtn(String sex);
 
-    public abstract boolean isMaleRadioBtnPresent();
+    public abstract boolean isSexRadioBtnPresent(String fieldSex);
 
-    public abstract boolean isFemaleRadioBtnPresent();
-
-    public abstract boolean isPasswordInputFieldPresent();
-
-    public abstract boolean isNameInputFieldPresent();
+    public abstract boolean isInputFieldPresent(String fieldName);
 
     public abstract String getUsername();
 
     public abstract String getPassword();
 
-    public abstract boolean isSexRadioBtnChecked(String MALE_SEX);
+    public abstract boolean isSexRadioBtnChecked(String sex);
 
     public abstract boolean isPrivacyPolicyCheckboxChecked();
 

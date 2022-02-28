@@ -34,10 +34,11 @@ import com.qaprosoft.carina.demo.utils.MobileContextUtils;
 import com.qaprosoft.carina.demo.utils.MobileContextUtils.View;
 import org.testng.asserts.SoftAssert;
 
+import static com.qaprosoft.carina.demo.constans.IConstans.*;
+
 
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
-    private static final String MALE_SEX = "male";
 
     @Test()
     @MethodOwner(owner = "qpsdemo")
@@ -115,10 +116,10 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         Assert.assertTrue(welcomePage.isPageOpened(), "Welcome page isn't opened");
         LoginPageBase loginPage = welcomePage.clickNextBtn();
         Assert.assertTrue(loginPage.isOpened(), "Login page isn`t opened");
-        softAssert.assertTrue(loginPage.isNameInputFieldPresent(), "Name input field isn't present");
-        softAssert.assertTrue(loginPage.isPasswordInputFieldPresent(), "Password input field is null");
-        softAssert.assertTrue(loginPage.isMaleRadioBtnPresent(), "Male radio button is null");
-        softAssert.assertTrue(loginPage.isFemaleRadioBtnPresent(), "Female radio button is null");
+        softAssert.assertTrue(loginPage.isInputFieldPresent(NAME_INPUT_FIELD), "Name input field isn't present");
+        softAssert.assertTrue(loginPage.isInputFieldPresent(PASSWORD_INPUT_FIELD), "Password input field is null");
+        softAssert.assertTrue(loginPage.isSexRadioBtnPresent(MALE_RADIO_BUTTON_FIELD), "Male radio button is null");
+        softAssert.assertTrue(loginPage.isSexRadioBtnPresent(FEMALE_RADIO_BUTTON_FIELD), "Female radio button is null");
         softAssert.assertTrue(loginPage.isPrivacyPolicyCheckboxPresent(), "Privacy Policy Checkbox is null");
         loginPage.typeName(username);
         Assert.assertEquals(loginPage.getUsername(), username, String.format("Username [%s] was not typed, [%s] was typed instead",
@@ -129,7 +130,8 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         Assert.assertEquals(loginPage.getPassword(), password, String.format("Password [%s] was not typed, [%s] was typed instead",
                 password, loginPage.getPassword()));
         loginPage.selectSexRadioBtn(MALE_SEX);
-        Assert.assertTrue(loginPage.isSexRadioBtnChecked(MALE_SEX), "Sex Radio Button was not checked");
+        Assert.assertTrue(loginPage.isSexRadioBtnChecked(MALE_SEX), String.format("Sex [%s] Radio Button was not checked",
+                MALE_SEX));
         loginPage.checkPrivacyPolicyCheckbox();
         Assert.assertTrue(loginPage.isPrivacyPolicyCheckboxChecked(), "Privacy Policy Checkbox was not checked");
         CarinaDescriptionPageBase carinaDescription = loginPage.clickLoginBtn();
